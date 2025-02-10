@@ -1,12 +1,12 @@
 {
     "name": "jest-webgpu-mock",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Mock WebGPU for Jest",
     "main": "lib/index.js",
     "scripts": {
         "test": "jest --no-cache",
         "build": "babel src --out-dir lib --extensions \".ts,.js\"",
-        "publish": "npm run build && npm publish"
+        "prepare": "npm run build"
     },
     "devDependencies": {
         "@babel/cli": "^7.26.4",
