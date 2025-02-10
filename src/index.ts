@@ -1,6 +1,24 @@
 import { mockWebGPUCanvas } from "./canvas"
 
+export class MockGPUCommandEncoder {
+	beginRenderPass() {}
+	endRenderPass() {}
+}
+
 export class MockGPUDevice {
+	createCommandEncoder() {
+		return new MockGPUCommandEncoder()
+	}
+
+	createSampler() {
+		return {}
+	}
+}
+
+export class MockGPUAdapter {
+	requestDevice(descriptor?: GPUDeviceDescriptor) {
+		return Promise.resolve(new MockGPUDevice())
+	}
 	createBuffer() {
 		return new MockGPUBuffer()
 	}
@@ -18,11 +36,17 @@ export class MockGPUBuffer {
 
 export class MockGPUTexture {}
 
+const mockGPU = {
+	requestAdapter: async () => new MockGPUAdapter(),
+	getPreferredCanvasFormat: () => {
+		return "bgra8unorm"
+	},
+}
+
 export function mockWebGPU() {
-	// @ts-ignore
-	globalThis.navigator.gpu = {
-		requestAdapter: async () => new MockGPUDevice(),
-	}
+	globalThis.navigator.gpu = mockGPU
 
 	mockWebGPUCanvas()
 }
+
+mockWebGPU()

@@ -13,6 +13,7 @@ describe("WebGPU Mock", () => {
 	it("should mock GPUDevice", async () => {
 		const adapter = await navigator.gpu.requestAdapter()
 		expect(adapter).toBeInstanceOf(MockGPUDevice)
+		expect(navigator.gpu.getPreferredCanvasFormat()).toBe("bgra8unorm")
 	})
 
 	it("should mock buffer creation", async () => {

@@ -7,5 +7,5 @@
 		"strict": true,
 		"types": ["@webgpu/types", "jest"]
 	},
-	"include": ["src/**.ts", "tests/**/*.ts"]
+	"include": ["src/**.ts"]
 }
