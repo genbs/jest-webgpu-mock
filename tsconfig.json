@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "CommonJS",
+		"outDir": "./lib",
+		"esModuleInterop": true,
+		"strict": true,
+		"types": ["@webgpu/types", "jest"]
+	},
+	"include": ["src/**.ts", "tests/**/*.ts"]
+}
