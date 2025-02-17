@@ -62,4 +62,19 @@ describe("WebGPU Mock", () => {
 		device.queue.writeBuffer(buffer, 0, data)
 		expect(device.queue.writeBuffer).toBeDefined()
 	})
+
+	it("should mock GPUBuffer methods", async () => {
+		const device = new MockGPUDevice()
+		const buffer = device.createBuffer()
+		expect(buffer.mapAsync).toBeDefined()
+		expect(buffer.getMappedRange).toBeDefined()
+		expect(buffer.unmap).toBeDefined()
+		expect(buffer.destroy).toBeDefined()
+
+		await buffer.mapAsync()
+		const mappedRange = buffer.getMappedRange(0, 8)
+		expect(mappedRange).toBeInstanceOf(ArrayBuffer)
+		buffer.unmap()
+		buffer.destroy()
+	})
 })

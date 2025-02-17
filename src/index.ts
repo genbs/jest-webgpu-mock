@@ -49,6 +49,11 @@ export class MockGPUBuffer {
 	mapAsync() {
 		return Promise.resolve()
 	}
+	getMappedRange(offset = 0, size?: number) {
+		return new ArrayBuffer(size || 0)
+	}
+	unmap() {}
+	destroy() {}
 }
 
 export class MockGPUTexture {
@@ -126,6 +131,11 @@ export function mockWebGPU() {
 	if (!globalThis.GPUSampler) {
 		// @ts-ignore
 		globalThis.GPUSampler = MockGPUSampler
+	}
+
+	if (!globalThis.GPUBuffer) {
+		// @ts-ignore
+		globalThis.GPUBuffer = MockGPUBuffer
 	}
 
 	// globalThis.GPUBuffer = MockGPUBuffer
